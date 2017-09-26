@@ -1,0 +1,25 @@
+<h2>
+  <%= link_to 'RailsCampBlog', articles_path, class: 'header-menu', method: :get %>
+  <%= link_to 'トップ', articles_path, class: 'header-menu', method: :get %>
+  <%= link_to 'ユーザー登録', new_userdate_path, class: 'header-menu' %>
+  <%= link_to 'ログイン', login_path, class: 'header-menu' %>
+</h2>
+
+<%= form_for @article  do |f| %>
+  <p>
+    <%= f.text_field :title, placeholder:'enter title'  %>
+    <% if @article.errors.messages[:title].any? %>
+    <span class="error"><%= @article.errors.messages[:title][0] %></span>
+    <% end %>
+  </p>
+  <p>
+    <%= f.text_area :body, placeholder: 'enter body text'  %>
+    <% if @article.errors.messages[:body].any? %>
+    <span class = "error"><%= @article.errors.messages[:body][0] %></span>
+    <% end %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
