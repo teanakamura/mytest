@@ -1,0 +1,19 @@
+<h2>
+  <%= link_to 'RailsCampBlog', articles_path, class: 'header-menu', method: :get %>
+  <%= link_to 'トップ', master_articles_path, class: 'header-menu', method: :get %>
+  <%= link_to '新規投稿', new_article_path, class: 'header-menu' %>
+  <%= link_to 'ログアウト', root_path, class: 'header-menu' %>
+  <div>
+    <%= image_tag('main.png', class: 'logo') %>
+  </div>
+</h2>
+<ul>
+  <% @articles.each do |article| %>
+  <li>
+    <%= link_to article.title, article_path(article.id), method: :get %><br/>
+    <%= article.created_at %><br/>
+    <%= link_to '編集', edit_article_path(article.id) %>
+    <%= link_to '削除', article_path(article.id), method: :delete%>
+  <% end %>
+  </li>
+</ul>
