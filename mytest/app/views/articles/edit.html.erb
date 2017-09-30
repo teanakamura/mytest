@@ -1,25 +1,43 @@
-<h2>
-  <%= link_to 'RailsCampBlog', articles_path, class: 'header-menu', method: :get %>
-  <%= link_to 'トップ', master_articles_path, class: 'header-menu', method: :get %>
-  <%= link_to 'ユーザー登録', new_userdate_path, class: 'header-menu' %>
-  <%= link_to 'ログイン', login_path, class: 'header-menu' %>
-</h2>
+<header>
+  <p id = 'logo'><%= link_to 'RailsCampBlog', root_path, method: :get %></p>
+  <nav>
+    <ul>
+      <li><%= link_to 'トップ', root_path, class: 'links', method: :get %></li>
+      <% if userdatum_signed_in? %>
+        <li><%= link_to '新規投稿', new_article_path %></li>
+        <li><%= link_to 'ログアウト', destroy_userdatum_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'ユーザー登録', new_userdatum_registration_path %></li>
+        <li><%= link_to 'ログイン', new_userdatum_session_path %></li>
+      <% end %>
+      <div class="clear"></div>
+    </ul>
+  </nav>
+  <div class="clear"></div>
+</header>
 
-<%= form_for @article  do |f| %>
-  <p>
+<div id="article_wrap">
+  <%= form_for @article do |f| %>
+    タイトル<br>
     <%= f.text_field :title, placeholder:'enter title'  %>
-    <% if @article.errors.messages[:title].any? %>
-    <span class="error"><%= @article.errors.messages[:title][0] %></span>
-    <% end %>
-  </p>
-  <p>
+      <% if @article.errors.messages[:title].any? %>
+        <span class="error"><%= @article.errors.messages[:title][0] %></span>
+      <% end %>
+    <br><br>
+    記事内容<br>
     <%= f.text_area :body, placeholder: 'enter body text'  %>
-    <% if @article.errors.messages[:body].any? %>
-    <span class = "error"><%= @article.errors.messages[:body][0] %></span>
-    <% end %>
-  </p>
-  <p>
+      <% if @article.errors.messages[:body].any? %>
+        <span class = "error"><%= @article.errors.messages[:body][0] %></span>
+      <% end %>
+    <br><br>
+    <%= f.hidden_field :userdatum_id, value: current_userdatum.id %>
     <%= f.submit %>
-  </p>
+    <br><br>
+  <% end %>
+</div>
 
-<% end %>
+<footer>
+    <div id="footer_inner">
+        <p>Copyright RailsCamp 2015 All Rights Reserved</p>
+    </div>
+</footer>

@@ -1,13 +1,39 @@
-<h2>
-  <%= link_to 'RailsCampBlog', articles_path, class: 'header-menu', method: :get %>
-  <%= link_to 'トップ', articles_path, class: 'header-menu', method: :get %>
-  <%= link_to 'ユーザー登録', new_userdate_path, class: 'header-menu' %>
-  <%= link_to 'ログイン', login_path, class: 'header-menu' %>
-</h2>
+<header>
+  <p id = 'logo'><%= link_to 'RailsCampBlog', root_path, method: :get %></p>
+  <nav>
+    <ul>
+      <li><%= link_to 'トップ', root_path, class: 'links', method: :get %></li>
+      <% if userdatum_signed_in? %>
+        <li><%= link_to '新規投稿', new_article_path %></li>
+        <li><%= link_to 'ログアウト', destroy_userdatum_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'ユーザー登録', new_userdatum_registration_path %></li>
+        <li><%= link_to 'ログイン', new_userdatum_session_path %></li>
+      <% end %>
+      <div class="clear"></div>
+    </ul>
+  </nav>
+  <div class="clear"></div>
+</header>
 
+<div id="title">
+    <div>
+      <%= @article.created_at.strftime("%Y/%m/%d") %>
+      書いた人:<%= @article.userdatum.email %>
+        <h1><%= @article.title %></h1>
+    </div>
+</div>
+
+<div id="article_wrap">
+    <div id="content">
+        <%= simple_format @article.body %>
+    </div>
+    <div class="clear"></div>
+</div>
 <p>
-  <%= @article.created_at  %>
-  <%= @article.user  %>
-</p>
-<h2><%= @article.title %></h2>
-<p><%= simple_format @article.body %></p>
+
+<footer>
+    <div id="footer_inner">
+        <p>Copyright RailsCamp 2015 All Rights Reserved</p>
+    </div>
+</footer>

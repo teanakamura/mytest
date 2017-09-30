@@ -52,5 +52,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # end
 #
 
+#ENV["REDIS"] = "http://localhost:6379"
+
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart

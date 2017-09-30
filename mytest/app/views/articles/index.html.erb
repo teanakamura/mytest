@@ -1,11 +1,18 @@
 
 <header>
-  <p id = 'logo'><%= link_to 'RailsCampBlog', articles_path, method: :get %></p>
+  <p id = 'logo'>
+    <%= link_to 'RailsCampBlog', root_path, method: :get  %>
+  </p>
   <nav>
     <ul>
-      <li><%= link_to 'トップ', articles_path, class: 'links', method: :get %></li>
-      <li><%= link_to 'ユーザー登録', new_userdate_path, class: 'links' %></li>
-      <li><%= link_to 'ログイン', login_path, class: 'links' %></li>
+      <li><%= link_to 'トップ', root_path, class: 'links', method: :get %></li>
+      <% if userdatum_signed_in? %>
+        <li><%= link_to '新規投稿', new_article_path %></li>
+        <li><%= link_to 'ログアウト', destroy_userdatum_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'ユーザー登録', new_userdatum_registration_path %></li>
+        <li><%= link_to 'ログイン', new_userdatum_session_path %></li>
+      <% end %>
       <div class="clear"></div>
     </ul>
   </nav>
@@ -26,7 +33,13 @@
           article_path(article.id),
           method: :get %>
         </h2>
-        <p><%= article.created_at %></p>
+        <p><%= article.created_at.strftime("%Y/%m/%d") %></p>
+        <% if userdatum_signed_in? %>
+          <p>
+            <%= link_to '編集', edit_article_path(article.id) %>
+            <%= link_to '削除', article_path(article.id), method: :delete%>
+          </p>
+        <% end %>
       </div>
       <% end %>
   </div>
