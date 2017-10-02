@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :userdates
 
   root 'articles#index'
-  #get 'login' => 'userdates#login'
+  get 'logintest' => 'userdates#login'
   #get 'master_articles' => 'articles#master'
   #post 'check_userdate' => 'userdates#check'
 
