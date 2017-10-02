@@ -1,0 +1,29 @@
+<h2>Sign up</h2>
+
+<%= form_for @userdate  do |f| %>
+  <ul>
+    Email<br>
+    <%= f.text_field :email  %>
+    <% if @userdate.errors.messages[:email].any? %>
+    <span class="error"><%= @userdate.errors.messages[:email][0] %></span>
+    <% end %>
+  </ul>
+  <ul>
+    Password<br>
+    <%= f.text_field :pass  %>
+    <% if @userdate.errors.messages[:pass].any? %>
+    <span class="error"><%= @userdate.errors.messages[:pass][0] %></span>
+    <% end %>
+  </ul>
+  <ul>
+    Password Confirmation<br>
+    <%= f.text_field :pass_confirmation  %>
+    <% if @userdate.errors.messages[:pass_confirmation].any? %>
+    <span class="error"><%= @userdate.errors.messages[:pass_confirmation][0] %></span>
+    <% end %>
+  </ul>
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
